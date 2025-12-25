@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Video, FileText, MessageCircle, Code2 } from 'lucide-react';
+import { LayoutDashboard, Atom, Beaker, Sigma, FileText, MessageCircle } from 'lucide-react';
 
 import {
   Sidebar,
@@ -17,7 +17,9 @@ import { user } from '@/lib/data';
 
 const menuItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/tutorials', label: 'Tutorials', icon: Video },
+  { href: '/physics', label: 'Physics', icon: Atom },
+  { href: '/chemistry', label: 'Chemistry', icon: Beaker },
+  { href: '/mathematics', label: 'Mathematics', icon: Sigma },
   { href: '/mock-tests', label: 'Mock Tests', icon: FileText },
   { href: '/doubts', label: 'Doubt Solver', icon: MessageCircle },
 ];
@@ -29,9 +31,9 @@ export default function AppSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-3 p-2">
-            <Code2 className="size-8 text-primary" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="size-8 text-primary"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             <h1 className="text-xl font-headline font-semibold text-sidebar-foreground">
-                DevPrep
+                JEEPrep
             </h1>
         </div>
       </SidebarHeader>

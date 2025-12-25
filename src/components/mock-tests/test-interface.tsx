@@ -36,9 +36,10 @@ type Question = {
 
 type TestInterfaceProps = {
   questions: Question[];
+  testId: string;
 };
 
-export default function TestInterface({ questions }: TestInterfaceProps) {
+export default function TestInterface({ questions, testId }: TestInterfaceProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -110,6 +111,19 @@ export default function TestInterface({ questions }: TestInterfaceProps) {
       setHint(result.data.hint);
     }
   };
+
+  if (!questions || questions.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-headline text-2xl">Coming Soon!</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>This test is currently under construction. Please check back later!</p>
+        </CardContent>
+      </Card>
+    );
+  }
   
   if (isFinished) {
     return (

@@ -18,7 +18,7 @@ type Message = {
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', content: "Hello! I'm your AI frontend tutor. How can I help you today?" }
+    { role: 'bot', content: "Hello! I'm your AI tutor for JEE. How can I help you with Physics, Chemistry, or Math today?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);

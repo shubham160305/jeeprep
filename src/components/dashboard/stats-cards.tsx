@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { stats } from '@/lib/data';
-import { BookOpen, Target, Award, Clock } from 'lucide-react';
+import { BookCopy, Target, Award, Clock } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 type StatCard = {
@@ -13,9 +13,9 @@ type StatCard = {
 export default function StatsCards() {
     const statData: StatCard[] = [
         {
-            title: 'Tutorials Completed',
-            value: stats.tutorialsCompleted,
-            icon: BookOpen,
+            title: 'Chapters Completed',
+            value: stats.chaptersCompleted,
+            icon: BookCopy,
             description: 'Keep up the learning!',
         },
         {

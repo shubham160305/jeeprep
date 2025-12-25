@@ -6,8 +6,8 @@ import { SidebarProvider } from '@/components/ui/sidebar';
 import AppSidebar from '@/components/layout/app-sidebar';
 
 export const metadata: Metadata = {
-  title: 'DevPrep Academy',
-  description: 'Your path to becoming a frontend master.',
+  title: 'JEEPrep Academy',
+  description: 'Your path to acing the JEE.',
 };
 
 export default function RootLayout({

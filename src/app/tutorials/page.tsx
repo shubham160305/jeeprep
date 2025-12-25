@@ -12,7 +12,7 @@ export default function TutorialsPage() {
 
     return (
         <div className="flex min-h-screen w-full flex-col">
-            <Header title="Video Tutorials" description="Expand your frontend skills with our expert-led courses." />
+            <Header title="JEE Video Lectures" description="Expand your knowledge with our expert-led courses." />
             <main className="flex-1 p-6">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {tutorials.map((tutorial) => {

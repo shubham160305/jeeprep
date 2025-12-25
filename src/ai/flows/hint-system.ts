@@ -31,15 +31,15 @@ const hintPrompt = ai.definePrompt({
   name: 'hintPrompt',
   input: {schema: HintInputSchema},
   output: {schema: HintOutputSchema},
-  prompt: `You are an experienced frontend development tutor.
+  prompt: `You are an expert JEE (Joint Entrance Examination) tutor.
 
   A student is stuck on the following question: {{{question}}}
 
   You need to provide a hint based on the hint level requested by the student. 
 
-  If the hint level is "small", provide a small, subtle hint that nudges the student in the right direction without giving away the answer.
-  If the hint level is "medium", provide a more direct hint that gives the student a significant clue.
-  If the hint level is "big", provide a very detailed hint that almost gives away the answer, but still requires the student to put in some effort.
+  If the hint level is "small", provide a small, subtle hint that nudges the student in the right direction without giving away the answer. Think about mentioning the core concept or formula involved.
+  If the hint level is "medium", provide a more direct hint that gives the student a significant clue. You could lay out the first step or point towards a specific part of the problem.
+  If the hint level is "big", provide a very detailed hint that almost gives away the answer, but still requires the student to perform the final calculation or connect the dots.
 
   Hint Level: {{{hintLevel}}}
 

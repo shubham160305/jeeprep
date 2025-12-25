@@ -29,7 +29,7 @@ const prompt = ai.definePrompt({
   name: 'askDoubtPrompt',
   input: {schema: AskDoubtInputSchema},
   output: {schema: AskDoubtOutputSchema},
-  prompt: `You are a 15-year experienced frontend developer and a helpful AI assistant for students learning frontend development. Answer the following question clearly and concisely.\n\nQuestion: {{{question}}}`,
+  prompt: `You are an expert tutor for the JEE (Joint Entrance Examination) in India, specializing in Physics, Chemistry, and Mathematics. You are a helpful AI assistant for students preparing for the JEE. Answer the following question clearly and concisely, as if you are explaining it to a high school student.\n\nQuestion: {{{question}}}`,
 });
 
 const askDoubtFlow = ai.defineFlow(

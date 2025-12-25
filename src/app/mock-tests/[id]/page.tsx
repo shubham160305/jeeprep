@@ -5,9 +5,9 @@ import TestInterface from '@/components/mock-tests/test-interface';
 
 export default function MockTestPage({ params }: { params: { id: string } }) {
   const test = mockTests.find((t) => t.id === params.id);
-  const questions = mockTestQuestions[params.id];
+  const questions = mockTestQuestions[params.id] ?? [];
 
-  if (!test || !questions) {
+  if (!test) {
     notFound();
   }
 
@@ -16,7 +16,7 @@ export default function MockTestPage({ params }: { params: { id: string } }) {
       <Header title={test.title} description={test.description} />
       <main className="flex-1 p-6">
         <div className="mx-auto max-w-2xl">
-          <TestInterface questions={questions} />
+          <TestInterface questions={questions} testId={params.id} />
         </div>
       </main>
     </div>
