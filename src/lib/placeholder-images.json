@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "html-basics",
+      "description": "A person learning the basics of HTML.",
+      "imageUrl": "https://images.unsplash.com/photo-1763568258605-6783d4fad7b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y29kZSUyMGxlYXJuaW5nfGVufDB8fHx8MTc2NjY0OTA3NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "code learning"
+    },
+    {
+      "id": "css-flexbox",
+      "description": "Visual representation of CSS Flexbox.",
+      "imageUrl": "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx3ZWIlMjBkZXNpZ258ZW58MHx8fHwxNzY2NTc2MDE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "web design"
+    },
+    {
+      "id": "js-fundamentals",
+      "description": "JavaScript code on a screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1672307974995-cd253f7f7eeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxqYXZhc2NyaXB0JTIwY29kZXxlbnwwfHx8fDE3NjY2NDkwNzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "javascript code"
+    },
+    {
+      "id": "react-hooks",
+      "description": "A diagram explaining React Hooks.",
+      "imageUrl": "https://images.unsplash.com/photo-1751699413631-bf89bc43f54d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxyZWFjdCUyMGRpYWdyYW18ZW58MHx8fHwxNzY2NjQ5MDc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "react diagram"
+    },
+    {
+      "id": "nextjs-routing",
+      "description": "A map showing Next.js routing.",
+      "imageUrl": "https://images.unsplash.com/photo-1550418290-a8d86ad674a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxmbG93JTIwY2hhcnR8ZW58MHx8fHwxNzY2NjQ5MDc0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "flow chart"
+    },
+    {
+      "id": "typescript-types",
+      "description": "TypeScript code with complex types.",
+      "imageUrl": "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx0eXBlc2NyaXB0JTIwc3ludGF4fGVufDB8fHx8MTc2NjY0OTA3NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "typescript syntax"
+    }
+  ]
 }
