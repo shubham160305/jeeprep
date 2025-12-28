@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
-import { Sidebar, SidebarProvider } from '@/components/ui/sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import AppSidebar from '@/components/layout/app-sidebar';
 
 export const metadata: Metadata = {
@@ -25,10 +25,10 @@ export default function RootLayout({
       </head>
       <body className={cn('font-body antialiased')}>
         <SidebarProvider>
-          <div className="flex">
             <AppSidebar />
-            <main className="flex-1">{children}</main>
-          </div>
+            <SidebarInset>
+                {children}
+            </SidebarInset>
         </SidebarProvider>
         <Toaster />
       </body>
