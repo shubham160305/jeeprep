@@ -10,6 +10,7 @@ import { askDoubt } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { user } from '@/lib/data';
+import { Card } from '../ui/card';
 
 type Message = {
   role: 'user' | 'bot';
@@ -61,8 +62,8 @@ export default function ChatInterface() {
   };
 
   return (
-    <div className="flex h-full flex-col p-4 md:p-6">
-      <ScrollArea className="flex-1" ref={scrollAreaRef}>
+    <Card className="flex h-full w-full flex-col">
+      <ScrollArea className="flex-1 p-4 md:p-6" ref={scrollAreaRef}>
         <div className="space-y-6 pr-4">
           {messages.map((message, index) => (
             <div
@@ -82,7 +83,7 @@ export default function ChatInterface() {
                   'max-w-md rounded-lg p-3',
                   message.role === 'user'
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-card'
+                    : 'bg-muted'
                 )}
               >
                 <p className="text-sm whitespace-pre-wrap">{message.content}</p>
@@ -99,14 +100,14 @@ export default function ChatInterface() {
                 <Avatar className="h-8 w-8 bg-primary text-primary-foreground">
                     <AvatarFallback><Bot size={18} /></AvatarFallback>
                 </Avatar>
-                <div className="max-w-md rounded-lg p-3 bg-card flex items-center">
+                <div className="max-w-md rounded-lg p-3 bg-muted flex items-center">
                     <Loader className="h-5 w-5 animate-spin text-muted-foreground" />
                 </div>
             </div>
           )}
         </div>
       </ScrollArea>
-      <div className="mt-4 border-t pt-4">
+      <div className="border-t p-4">
         <form onSubmit={handleSubmit} className="flex items-center gap-2">
           <Input
             value={input}
@@ -125,6 +126,6 @@ export default function ChatInterface() {
           </Button>
         </form>
       </div>
-    </div>
+    </Card>
   );
 }

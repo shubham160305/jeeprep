@@ -14,20 +14,20 @@ export default function TutorialsPage() {
         <div className="flex min-h-screen w-full flex-col">
             <Header title="JEE Video Lectures" description="Expand your knowledge with our expert-led courses." />
             <main className="flex-1 p-6">
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
                     {tutorials.map((tutorial) => {
                         const placeholder = imageMap.get(tutorial.imageId);
                         return (
                             <Link href={`/tutorials/${tutorial.id}`} key={tutorial.id} className="group">
                                 <Card className="flex h-full flex-col overflow-hidden transition-all group-hover:shadow-lg group-hover:-translate-y-1">
                                     <CardHeader className="p-0">
-                                        <div className="relative h-48 w-full">
+                                        <div className="relative aspect-video w-full">
                                             {placeholder && (
                                                 <Image
                                                     src={placeholder.imageUrl}
                                                     alt={tutorial.title}
                                                     fill
-                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                                     className="object-cover"
                                                     data-ai-hint={placeholder.imageHint}
                                                 />
@@ -36,7 +36,7 @@ export default function TutorialsPage() {
                                     </CardHeader>
                                     <CardContent className="flex-1 p-4">
                                         <CardTitle className="mb-2 font-headline text-lg">{tutorial.title}</CardTitle>
-                                        <p className="text-sm text-muted-foreground">{tutorial.description}</p>
+                                        <p className="text-sm text-muted-foreground line-clamp-2">{tutorial.description}</p>
                                     </CardContent>
                                     <CardFooter className="p-4 pt-0">
                                         <Badge variant="secondary" className="flex items-center gap-1.5">

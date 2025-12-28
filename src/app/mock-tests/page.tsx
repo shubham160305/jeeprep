@@ -10,7 +10,7 @@ export default function MockTestsPage() {
     <div className="flex min-h-screen w-full flex-col">
       <Header title="Mock Tests" description="Put your skills to the test with our challenging exercises." />
       <main className="flex-1 p-6">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {mockTests.map((test) => (
             <Card key={test.id} className="flex flex-col">
               <CardHeader>
