@@ -6,7 +6,7 @@ export default function DoubtsPage() {
     <div className="flex h-screen flex-col">
       <Header title="Doubt Solver" description="Ask our AI tutor anything about Physics, Chemistry, or Math." />
       <main className="flex flex-1 items-center justify-center p-4">
-        <div className="w-full max-w-2xl h-full">
+        <div className="h-full w-full">
             <ChatInterface />
         </div>
       </main>

@@ -16,7 +16,7 @@ export default function TutorialDetailPage({ params }: { params: { id: string } 
     <div className="flex min-h-screen w-full flex-col">
       <Header title={tutorial.title} />
       <main className="flex-1 p-6">
-        <div className="mx-auto max-w-4xl">
+        <div className="w-full">
             <Card className="overflow-hidden">
                 <div className="aspect-video w-full">
                     <iframe

@@ -15,7 +15,7 @@ export default function MockTestPage({ params }: { params: { id: string } }) {
     <div className="flex min-h-screen w-full flex-col">
       <Header title={test.title} description={test.description} />
       <main className="flex-1 p-6">
-        <div className="mx-auto max-w-2xl">
+        <div className="w-full">
           <TestInterface questions={questions} testId={params.id} />
         </div>
       </main>
