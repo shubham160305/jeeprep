@@ -12,16 +12,38 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SignupPage() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // For now, we'll just redirect to the dashboard.
-    // We can add real authentication later.
-    localStorage.setItem('isLoggedIn', 'true');
-    router.push('/dashboard');
+    setLoading(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: formData.get("name"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+      }),
+    });
+
+    if (!res.ok) {
+      setError("User already exists or signup failed");
+      setLoading(false);
+      return;
+    }
+
+    // ✅ Redirect to login after successful signup
+    router.push("/login");
   };
 
   return (
@@ -33,31 +55,35 @@ export default function SignupPage() {
             Enter your information to create an account
           </CardDescription>
         </CardHeader>
+
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-4">
+              {error && (
+                <p className="text-sm text-red-500">{error}</p>
+              )}
+
               <div className="grid gap-2">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Alex Morgan" required />
+                <Input id="name" name="name" required />
               </div>
+
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
+                <Input id="email" name="email" type="email" required />
               </div>
+
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
-                Create an account
+
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Creating account..." : "Create an account"}
               </Button>
             </div>
           </form>
+
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
             <Link href="/login" className="underline">
