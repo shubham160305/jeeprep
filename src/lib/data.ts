@@ -71,6 +71,31 @@ export const tutorials = [
     },
 ];
 
+export const subjects = [
+  {
+    id: 'physics',
+    title: 'Physics',
+    description: 'Mechanics, Thermodynamics, Optics & Modern Physics',
+    duration: '25 Chapters',
+    imageId: 'physics',
+  },
+  {
+    id: 'chemistry',
+    title: 'Chemistry',
+    description: 'Physical, Organic & Inorganic Chemistry',
+    duration: '22 Chapters',
+    imageId: 'chemistry',
+  },
+  {
+    id: 'maths',
+    title: 'Mathematics',
+    description: 'Algebra, Calculus, Trigonometry & Coordinate Geometry',
+    duration: '30 Chapters',
+    imageId: 'maths',
+  },
+];
+
+
 export const mockTests = [
     {
         id: 'physics-mechanics-1',

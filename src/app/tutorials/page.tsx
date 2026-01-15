@@ -1,55 +1,64 @@
-import Link from 'next/link';
-import Image from 'next/image';
+'use client';
+
+import AppShell from '@/components/layout/AppShell';
 import Header from '@/components/layout/header';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { tutorials } from '@/lib/data';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Clock } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+type Subject = {
+  id: string;
+  name: string;
+  description?: string;
+  duration?: string;
+};
 
 export default function TutorialsPage() {
-    const imageMap = new Map(PlaceHolderImages.map(img => [img.id, img]));
+  const { data: session, status } = useSession();
+  const [subjects, setSubjects] = useState<Subject[]>([]);
 
-    return (
-        <div className="flex min-h-screen w-full flex-col">
-            <Header title="JEE Video Lectures" description="Expand your knowledge with our expert-led courses." />
-            <main className="flex-1 p-6">
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-                    {tutorials.map((tutorial) => {
-                        const placeholder = imageMap.get(tutorial.imageId);
-                        return (
-                            <Link href={`/tutorials/${tutorial.id}`} key={tutorial.id} className="group">
-                                <Card className="flex h-full flex-col overflow-hidden transition-all group-hover:shadow-lg group-hover:-translate-y-1">
-                                    <CardHeader className="p-0">
-                                        <div className="relative aspect-video w-full">
-                                            {placeholder && (
-                                                <Image
-                                                    src={placeholder.imageUrl}
-                                                    alt={tutorial.title}
-                                                    fill
-                                                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                                    className="object-cover"
-                                                    data-ai-hint={placeholder.imageHint}
-                                                />
-                                            )}
-                                        </div>
-                                    </CardHeader>
-                                    <CardContent className="flex-1 p-4">
-                                        <CardTitle className="mb-2 font-headline text-lg">{tutorial.title}</CardTitle>
-                                        <p className="text-sm text-muted-foreground line-clamp-2">{tutorial.description}</p>
-                                    </CardContent>
-                                    <CardFooter className="p-4 pt-0">
-                                        <Badge variant="secondary" className="flex items-center gap-1.5">
-                                            <Clock className="h-3 w-3" />
-                                            {tutorial.duration}
-                                        </Badge>
-                                    </CardFooter>
-                                </Card>
-                            </Link>
-                        );
-                    })}
-                </div>
-            </main>
-        </div>
-    );
+  useEffect(() => {
+    fetch('/api/subjects')
+      .then(res => res.json())
+      .then(setSubjects);
+  }, []);
+
+  if (status === 'loading') return null;
+  if (!session) redirect('/login');
+
+  return (
+    <AppShell>
+      <Header
+        title="JEE Subjects"
+        description="Choose a subject to start learning chapter by chapter."
+      />
+
+      <main className="p-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {subjects.map(subject => (
+          <Link key={subject.id} href={`/tutorials/${subject.id}`}>
+            <Card className="hover:shadow-lg transition">
+              <CardHeader>
+                <CardTitle>{subject.name}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  {subject.description || 'Complete syllabus'}
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Badge variant="secondary">
+                  <Clock className="h-3 w-3 mr-1" />
+                  {subject.duration || 'Full Course'}
+                </Badge>
+              </CardFooter>
+            </Card>
+          </Link>
+        ))}
+      </main>
+    </AppShell>
+  );
 }

@@ -1,10 +1,10 @@
 import { pool } from "@/lib/db";
 import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     // 🔐 GOOGLE OAUTH
     GoogleProvider({
@@ -16,26 +16,33 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { type: "email" },
+        password: { type: "password" },
       },
       async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) return null;
+
         const res = await pool.query(
           "SELECT * FROM users WHERE email=$1",
-          [credentials!.email]
+          [credentials.email]
         );
 
         const user = res.rows[0];
         if (!user || !user.password_hash) return null;
 
         const valid = await bcrypt.compare(
-          credentials!.password,
+          credentials.password,
           user.password_hash
         );
 
         if (!valid) return null;
 
-        return user;
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        };
       },
     }),
   ],
@@ -51,8 +58,10 @@ const handler = NextAuth({
 
         if (exists.rowCount === 0) {
           await pool.query(
-            `INSERT INTO users (name, email, provider)
-             VALUES ($1, $2, 'google')`,
+            `
+            INSERT INTO users (name, email, provider, role)
+            VALUES ($1, $2, 'google', 'user')
+            `,
             [user.name, user.email]
           );
         }
@@ -64,22 +73,27 @@ const handler = NextAuth({
     async jwt({ token }) {
       if (token.email) {
         const res = await pool.query(
-          "SELECT role FROM users WHERE email=$1",
+          "SELECT role, id FROM users WHERE email=$1",
           [token.email]
         );
+
         token.role = res.rows[0]?.role || "user";
+        token.id = res.rows[0]?.id;
       }
       return token;
     },
 
-    // ✅ EXPOSE ROLE TO UI
+    // ✅ EXPOSE ROLE + ID TO CLIENT
     async session({ session, token }) {
       session.user.role = token.role as string;
+      session.user.id = token.id as string;
       return session;
     },
   },
 
   session: { strategy: "jwt" },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

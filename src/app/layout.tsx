@@ -1,5 +1,3 @@
-import { Toaster } from '@/components/ui/toaster';
-import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import './globals.css';
 import Providers from './providers';
@@ -15,12 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn('font-body antialiased')}>
+    <html lang="en">
+      <body>
         <Providers>
           {children}
         </Providers>
-        <Toaster />
       </body>
     </html>
   );
