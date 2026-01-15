@@ -1,9 +1,16 @@
-import { notFound } from 'next/navigation';
-import Header from '@/components/layout/header';
-import { mockTests, mockTestQuestions } from '@/lib/data';
-import TestInterface from '@/components/mock-tests/test-interface';
+'use client';
 
-export default function MockTestPage({ params }: { params: { id: string } }) {
+import AppShell from '@/components/layout/AppShell';
+import Header from '@/components/layout/header';
+import TestInterface from '@/components/mock-tests/test-interface';
+import { mockTestQuestions, mockTests } from '@/lib/data';
+import { notFound } from 'next/navigation';
+
+export default function MockTestPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const test = mockTests.find((t) => t.id === params.id);
   const questions = mockTestQuestions[params.id] ?? [];
 
@@ -12,19 +19,14 @@ export default function MockTestPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
-      <Header title={test.title} description={test.description} />
-      <main className="flex-1 p-6">
-        <div className="w-full">
-          <TestInterface questions={questions} testId={params.id} />
-        </div>
-      </main>
-    </div>
-  );
-}
+    <AppShell>
+      <div className="flex min-h-screen w-full flex-col">
+        <Header title={test.title} description={test.description} />
 
-export async function generateStaticParams() {
-    return mockTests.map((test) => ({
-      id: test.id,
-    }));
+        <main className="flex-1 p-6">
+          <TestInterface questions={questions} testId={params.id} />
+        </main>
+      </div>
+    </AppShell>
+  );
 }
